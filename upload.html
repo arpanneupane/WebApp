@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Video</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="nav-bar">
+      <button id="home-btn">Home</button>
+    </div>
+  </header>
+  <main>
+    <div class="form-container">
+      <h2>Upload Video</h2>
+      <form action="php/upload.php" method="POST" enctype="multipart/form-data">
+        <label for="video-title">Video Title:</label>
+        <input type="text" id="video-title" name="video-title" required>
+        <label for="video-file">Choose Video:</label>
+        <input type="file" id="video-file" name="video-file" accept="video/*" required>
+        <button type="submit">Upload</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

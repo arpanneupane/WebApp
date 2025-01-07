@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TikTok WebApp</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="nav-bar">
+      <button id="home-btn">Home</button>
+      <input type="text" id="search-bar" placeholder="Search...">
+      <div id="auth-buttons">
+        <button id="signup-btn">Sign Up</button>
+        <button id="signin-btn">Sign In</button>
+      </div>
+    </div>
+  </header>
+  <main id="video-container">
+    <!-- Sample videos -->
+    <div class="video-card" data-title="Sample Video 1">
+      <video class="video" src="assets/videos/sample1.mp4" muted></video>
+      <div class="video-details">
+        <p class="title">Sample Video 1</p>
+        <button class="like-btn">Like</button>
+        <textarea class="comment-box" placeholder="Write a comment..."></textarea>
+      </div>
+    </div>
+    <div class="video-card" data-title="Sample Video 2">
+      <video class="video" src="assets/videos/sample2.mp4" muted></video>
+      <div class="video-details">
+        <p class="title">Sample Video 2</p>
+        <button class="like-btn">Like</button>
+        <textarea class="comment-box" placeholder="Write a comment..."></textarea>
+      </div>
+    </div>
+  </main>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header>
+    <div class="nav-bar">
+      <button id="home-btn">Home</button>
+      <div id="profile-nav">
+        <span id="username-display">User</span>
+        <button id="logout-btn" onclick="window.location.href='php/logout.php'">Logout</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <h2>Your Videos</h2>
+    <div id="video-list">
+      <!-- Thumbnails for uploaded videos -->
+      <div class="video-thumbnail" data-video-id="1">
+        <img src="assets/videos/thumbnail1.jpg" alt="Video Thumbnail">
+        <button class="edit-btn" onclick="editVideo(1)">Edit</button>
+        <button class="delete-btn" onclick="deleteVideo(1)">Delete</button>
+      </div>
+    </div>
+    <button onclick="window.location.href='upload.html'">Upload Video</button>
+  </main>
+</body>
+</html>
