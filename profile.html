@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <div class="nav-bar">
-      <button id="home-btn">Home</button>
-      <div id="profile-nav">
-        <span id="username-display">User</span>
-        <button id="logout-btn" onclick="window.location.href='php/logout.php'">Logout</button>
-      </div>
+    <nav>
+        <a href="index.html" class="home-btn">Home</a>
+        <span class="username">Logged in as: <?php echo $_SESSION['username']; ?></span>
+        <a href="logout.php" class="btn logout-btn">Logout</a>
+    </nav>
+    <h1>Your Profile</h1>
+    <div class="upload-section">
+        <form action="upload.php" method="POST" enctype="multipart/form-data">
+            <input type="file" name="video" required>
+            <button type="submit">Upload Video</button>
+        </form>
     </div>
-  </header>
-  <main>
-    <h2>Your Videos</h2>
-    <div id="video-list">
-      <!-- Thumbnails for uploaded videos -->
-      <div class="video-thumbnail" data-video-id="1">
-        <img src="assets/videos/thumbnail1.jpg" alt="Video Thumbnail">
-        <button class="edit-btn" onclick="editVideo(1)">Edit</button>
-        <button class="delete-btn" onclick="deleteVideo(1)">Delete</button>
-      </div>
+    <div class="video-list">
+        <h2>Your Videos</h2>
+        <!-- Display user videos dynamically -->
+        <?php
+        $videos = scandir("uploads/" . $_SESSION['username']);
+        foreach ($videos as $video) {
+            if ($video !== '.' && $video !== '..') {
+                echo "<div class='video-item'>";
+                echo "<video src='uploads/{$_SESSION['username']}/$video' controls></video>";
+                echo "<p>$video</p>";
+                echo "</div>";
+            }
+        }
+        ?>
     </div>
-    <button onclick="window.location.href='upload.html'">Upload Video</button>
-  </main>
 </body>
 </html>
