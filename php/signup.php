@@ -1,23 +1,22 @@
 <?php
+session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $username = $_POST['username'];
-  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-  $name = $_POST['name'];
+    $username = $_POST['username'];
+    $name = $_POST['name'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-  $conn = new mysqli('localhost', 'root', '', 'tiktok');
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-  }
+    // Store user data
+    $userData = "$username,$name,$password\n";
+    file_put_contents('users.txt', $userData, FILE_APPEND);
 
-  $sql = "INSERT INTO users (username, password, name) VALUES ('$username', '$password', '$name')";
-  if ($conn->query($sql) === TRUE) {
-    session_start();
+    // Log in the user
     $_SESSION['username'] = $username;
-    header('Location: ../profile.html');
-  } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-  }
+    $_SESSION['name'] = $name;
 
-  $conn->close();
+    // Create user upload directory
+    mkdir("uploads/$username");
+
+    header('Location: profile.html');
+    exit;
 }
 ?>
