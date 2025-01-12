@@ -1,22 +1,23 @@
 <?php
-session_start();
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+include 'database.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $name = $_POST['name'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-    // Store user data
-    $userData = "$username,$name,$password\n";
-    file_put_contents('users.txt', $userData, FILE_APPEND);
+    try {
+        $query = "INSERT INTO users (username, name, password) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($query);
+        $stmt->execute([$username, $name, $password]);
 
-    // Log in the user
-    $_SESSION['username'] = $username;
-    $_SESSION['name'] = $name;
-
-    // Create user upload directory
-    mkdir("uploads/$username");
-
-    header('Location: profile.html');
-    exit;
+        echo "Signup successful!";
+    } catch (PDOException $e) {
+        if ($e->getCode() == 23000) { // Duplicate entry
+            echo "Username already exists!";
+        } else {
+            echo "Error: " . $e->getMessage();
+        }
+    }
 }
 ?>
